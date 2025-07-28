@@ -2,7 +2,7 @@ import { ToPrimitives } from './ToPrimitives'
 import { Uuid } from './value-object/uuid/Uuid'
 
 export abstract class Entity<Props> {
-    public readonly _id: Uuid
+    protected readonly _id: Uuid
 
     constructor(
         protected readonly props: Props,
