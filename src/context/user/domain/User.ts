@@ -2,6 +2,9 @@ import { Entity } from '../../shared/domain/Entity'
 import { EmailValueObject } from '../../shared/domain/value-object/email/EmailValueObject'
 import { StringValueObject } from '../../shared/domain/value-object/string/StringValueObject'
 import { Uuid } from '../../shared/domain/value-object/uuid/Uuid'
+import { UserDeletedAt } from './UserDeletedAt'
+import { UserName } from './UserName'
+import { UserPassword } from './UserPassword'
 import { UserPrimitives } from './UserPrimitives'
 import { UserProps } from './UserProps'
 
@@ -18,6 +21,10 @@ export class User extends Entity<UserProps> {
         return this.props.email.value
     }
 
+    public get username(): string {
+        return this.props.username.value
+    }
+
     public get password(): string {
         return this.props.password.value
     }
@@ -26,7 +33,11 @@ export class User extends Entity<UserProps> {
         return this.props.urlProfile?.value
     }
 
-    public updatePassword(password: StringValueObject) {
+    public updateDeletedAt(date: UserDeletedAt) {
+        this.props.deletedAt = date
+    }
+
+    public updatePassword(password: UserPassword) {
         this.props.password = password
     }
 
@@ -37,6 +48,7 @@ export class User extends Entity<UserProps> {
     public static fromPrimitives({
         id,
         email,
+        username,
         password,
         urlProfile,
     }: UserPrimitives): User {
@@ -47,6 +59,7 @@ export class User extends Entity<UserProps> {
             urlProfile: urlProfile
                 ? new StringValueObject(urlProfile)
                 : undefined,
+            username: new UserName(username),
         })
     }
 
@@ -54,6 +67,7 @@ export class User extends Entity<UserProps> {
         return {
             id: this.id,
             email: this.email,
+            username: this.username,
             password: this.password,
             urlProfile: this.urlProfile,
         }

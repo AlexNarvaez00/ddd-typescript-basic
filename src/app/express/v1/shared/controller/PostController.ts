@@ -1,9 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
 
 export interface PostController {
-    save(
-        request: Request,
-        response: Response,
-        next?: NextFunction
-    ): Promise<void>
+    save(request: Request, response: Response): Promise<void>
 }

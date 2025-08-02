@@ -1,9 +1,9 @@
 import jwt, { Algorithm } from 'jsonwebtoken'
-import { User } from '../../user/domain/User'
-import { AuthenticationTokenHasherService } from '../domain/AuthenticationTokenHasherService'
+import { User } from '../../domain/User'
+import { UserAuthenticationTokenHasher } from '../../domain/UserAuthenticationTokenHasher'
 
 export class JWTAuthenticationTokenHasherService
-    implements AuthenticationTokenHasherService
+    implements UserAuthenticationTokenHasher
 {
     constructor(
         private readonly secret: string,

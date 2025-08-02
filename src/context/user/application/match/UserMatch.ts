@@ -1,6 +1,6 @@
-import { Criteria } from '../../shared/domain/criteria/Criteria'
-import { User } from '../domain/User'
-import { UserRepository } from '../domain/UserRepository'
+import { Criteria } from '../../../shared/domain/criteria/Criteria'
+import { User } from '../../domain/User'
+import { UserRepository } from '../../domain/UserRepository'
 
 export class UserMatch {
     constructor(private readonly userRepository: UserRepository) {}
