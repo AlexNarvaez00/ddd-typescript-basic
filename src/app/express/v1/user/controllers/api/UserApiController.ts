@@ -2,18 +2,24 @@ import { Request, Response } from 'express'
 import { Criteria } from '../../../../../../context/shared/domain/criteria/Criteria'
 import { Filters } from '../../../../../../context/shared/domain/criteria/Filters'
 import { Order } from '../../../../../../context/shared/domain/criteria/Order'
+import { UserDestroy } from '../../../../../../context/user/application/destroy/UserDestroy'
 import { UserMatch } from '../../../../../../context/user/application/match/UserMatch'
-import { UserRepository } from '../../../../../../context/user/domain/UserRepository'
-import { ApiController } from '../../../shared/controller/ApiController'
 import { UserSave } from '../../../../../../context/user/application/save/UserSave'
 import { UserPasswordEncryption } from '../../../../../../context/user/domain/UserPasswordEncryption'
-import { UserDestroy } from '../../../../../../context/user/application/destroy/UserDestroy'
+import { UserRepository } from '../../../../../../context/user/domain/UserRepository'
+import { ApiController } from '../../../shared/controller/ApiController'
 
 export class UserController implements ApiController {
-    constructor(
-        private readonly userRepository: UserRepository,
-        private readonly userPasswordEncryption: UserPasswordEncryption
-    ) {}
+    private readonly userRepository: UserRepository
+    private readonly userPasswordEncryption: UserPasswordEncryption
+
+    constructor(params: {
+        userRepository: UserRepository
+        userPasswordEncryption: UserPasswordEncryption
+    }) {
+        this.userRepository = params.userRepository
+        this.userPasswordEncryption = params.userPasswordEncryption
+    }
 
     public async index(request: Request, response: Response): Promise<void> {
         const userMatcher = new UserMatch(this.userRepository)

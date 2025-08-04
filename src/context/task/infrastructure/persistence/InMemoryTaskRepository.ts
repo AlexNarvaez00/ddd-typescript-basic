@@ -1,9 +1,7 @@
-import { injectable } from 'inversify'
 import { Criteria } from '../../../shared/domain/criteria/Criteria'
 import { Task } from '../../domain/Task'
 import { TaskRepository } from '../../domain/TaskRepository'
 
-@injectable()
 export class InMemoryTaskRepository implements TaskRepository {
     private readonly tasks: Map<string, Task>
 
